@@ -115,8 +115,8 @@ class RandomStateGenerator():
             key_pos=d["key_loc"],
             key_present=d['key_present'],
             door_locked=d['door_locked'],
-            wall_column=d['door_coord'][0],
-            door_posn=d['door_coord'][1]
+            wall_column=4,
+            door_posn=3
         )
 
         self.env.reset()
