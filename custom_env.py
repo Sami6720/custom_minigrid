@@ -115,7 +115,7 @@ class RandomStateGenerator():
             key_pos=d["key_loc"],
             key_present=d['key_present'],
             door_locked=d['door_locked'],
-            wall_column=4,
+            wall_column=3,
             door_posn=3
         )
 
