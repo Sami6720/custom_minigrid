@@ -55,8 +55,8 @@ class DoorKeyCustom(MiniGridEnv):
         else:
             self.place_agent()
 
-        # for i in range(0, height):
-        #     self.grid.set(self.wall_column, i, Wall())
+        for i in range(0, height):
+            self.grid.set(self.wall_column, i, Wall())
 
         self.grid.set(self.wall_column, self.door_posn, Door('yellow', is_locked=self.door_locked))
         self.grid.set(self.key_pos[0], self.key_pos[1], Key('yellow'))
