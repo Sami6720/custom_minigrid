@@ -13,16 +13,17 @@ class DoorKeyCustom(MiniGridEnv):
         size=6,
         agent_start_pos=(1, 1),
         agent_start_dir=0,
+        max_steps: int | None = None,
         **kwargs,
     ):
         self.agent_start_pos = agent_start_pos
         self.agent_start_dir = agent_start_dir
 
-        self.key_pos = kwargs['key_pos']
+        self.key_pos = kwargs['key_pos'] 
         self.key_present = kwargs['key_present']
         self.door_locked = kwargs['door_locked']
         self.wall_column = kwargs['wall_column']
-        self.door_coords = kwargs['door_coord']
+        self.door_posn = kwargs['door_posn']
 
         mission_space = MissionSpace(mission_func=self._gen_mission)
 
@@ -51,14 +52,11 @@ class DoorKeyCustom(MiniGridEnv):
         else:
             self.place_agent()
 
-        
         for i in range(0, height):
             self.grid.set(self.wall_column, i, Wall())
 
-        self.grid.set(self.door_coords[0], self.door_coords[1],
-                      Door('yellow', is_locked=self.door_locked))
+        self.grid.set(self.wall_column, self.door_posn, Door('yellow', is_locked=self.door_locked))
         self.grid.set(self.key_pos[0], self.key_pos[1], Key('yellow'))
-
 
 class RandomCoordGenerator():
 
@@ -88,7 +86,6 @@ class RandomStateGenerator():
         self.atts = ['agent_loc', 'agent_orient', 'key_loc', 'key_present',
                      'door_locked', 'wall_col', 'door_coord']
         self.random_coord_gen = RandomCoordGenerator(upper_bound=self.size - 1)
-        self.frame_name = f'frame_{random.randint}.png'
 
     def generate(self):
 
@@ -107,23 +104,23 @@ class RandomStateGenerator():
             print(f"{x}: {d[x]}")
 
         # agent_loc_(1, 1)_agent_orient_3_key_loc_(1, 2)_key_present_True_door_open_False_wall_col_3_door_pos_in_wall_2
-        self.env = DoorKeyCustom(
-            size=self.size,
-            agent_start_pos=d["agent_loc"],
-            agent_start_dir=d["agent_orient"],
-            key_pos=d["key_loc"],
-            key_present=d['key_present'],
-            door_locked=d['door_locked'],
-            wall_column=d['door_coord'][0],
-            door_coord=d['door_coord']
-        )
-
-        self.env.reset()
-
-        frame = self.env.get_frame()
-        img_obj = Image.fromarray(frame.astype(np.uint8))
-        img_obj.save(
-            f'{self.frame_name}')
+        # self.env = DoorKeyCustom(
+        #     size=self.size,
+        #     agent_start_pos=d["agent_loc"],
+        #     agent_start_dir=d["agent_orient"],
+        #     key_pos=d["key_loc"],
+        #     key_present=d['key_present'],
+        #     door_locked=d['door_locked'],
+        #     wall_column=d['door_coord'][0],
+        #     door_coord=d['door_coord']
+        # )
+        #
+        # self.env.reset()
+        #
+        # frame = self.env.get_frame()
+        # img_obj = Image.fromarray(frame.astype(np.uint8))
+        # img_obj.save(
+        #     f'{self.frame_name}')
 
         self.random_coord_gen.reset()
 
