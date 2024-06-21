@@ -88,7 +88,7 @@ class RandomStateGenerator():
         self.size = grid_size
         self.atts = ['agent_loc', 'agent_orient', 'key_loc', 'key_present',
                      'door_locked', 'wall_col', 'door_coord']
-        self.random_coord_gen = RandomCoordGenerator(upper_bound=self.size - 1)
+        self.random_coord_gen = RandomCoordGenerator(upper_bound=self.size - 2)
         self.frame_name = 'frame.png'
 
     def generate(self):
