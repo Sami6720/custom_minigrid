@@ -72,8 +72,8 @@ class RandomCoordGenerator():
     def generate(self):
         rand_cords = (random.randint(0, self.ub), random.randint(0, self.ub))
         while rand_cords in self.visited:
-            rand_cords = (random.randint(0, self.ub),
-                          random.randint(0, self.ub))
+            rand_cords = (random.randint(1, self.ub),
+                          random.randint(1, self.ub))
 
         self.visited.add(rand_cords)
         return rand_cords
