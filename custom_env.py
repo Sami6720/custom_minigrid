@@ -22,7 +22,7 @@ class DoorKeyCustom(MiniGridEnv):
         self.agent_start_pos = agent_start_pos
         self.agent_start_dir = agent_start_dir
 
-        self.key_pos = kwargs['key_pos'] 
+        self.key_pos = kwargs['key_pos']
         self.key_present = kwargs['key_present']
         self.door_locked = kwargs['door_locked']
         self.wall_column = kwargs['wall_column']
@@ -58,14 +58,16 @@ class DoorKeyCustom(MiniGridEnv):
         for i in range(0, height):
             self.grid.set(self.wall_column, i, Wall())
 
-        self.grid.set(self.wall_column, self.door_posn, Door('yellow', is_locked=self.door_locked))
+        self.grid.set(self.wall_column, self.door_posn,
+                      Door('yellow', is_locked=self.door_locked))
         self.grid.set(self.key_pos[0], self.key_pos[1], Key('yellow'))
+
 
 class RandomCoordGenerator():
 
     def __init__(self, upper_bound) -> None:
         """Generatre unique coords"""
-        
+
         self.ub = upper_bound
         self.visited = set()
 
@@ -103,7 +105,7 @@ class RandomStateGenerator():
                 d[x] = 2
                 print(f"{x}: {d[x]}")
                 continue
-                
+
             d[x] = self.random_coord_gen.generate()
             print(f"{x}: {d[x]}")
 
