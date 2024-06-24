@@ -34,6 +34,7 @@ class DoorKeyCustom(MiniGridEnv):
             mission_space=mission_space,
             grid_size=size,
             max_steps=256,
+            highlight=False
             # **kwargs,
         )
 
