@@ -124,7 +124,7 @@ class RandomStateGenerator():
 
         self.env.reset()
 
-        frame = self.env.get_frame()
+        frame = self.env.get_frame(highlight=False)
         img_obj = Image.fromarray(frame.astype(np.uint8))
         img_obj.save(
             f'{self.frame_name}')
